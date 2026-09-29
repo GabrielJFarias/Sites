@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Horários das Aulas — FORJA Studio de Treino</title>
+<meta name="description" content="Confira a grade completa de horários de treinos funcionais, força e mobilidade na FORJA.">
+<meta name="theme-color" content="#1C1B19">
+<meta property="og:title" content="Horários das Aulas — FORJA Studio de Treino">
+<meta property="og:description" content="Grade completa e fixa de segunda a sábado. Agende sua aula!">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#1C1B19; --charcoal-2:#232120; --chalk:#F3F1EA; --chalk-2:#EAE7DC;
+    --amber:#E8A23A; --amber-dim:#B87A26; --graphite:#8B8880;
+    --steel-line:#33312D; --steel-line-light:#DAD5C7; --ink:#141312; --maxw:1160px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; font-family:'Inter',sans-serif; background:var(--chalk); color:var(--ink); line-height:1.5;}
+  h1,h2,h3{font-family:'Anton',sans-serif; font-weight:400; letter-spacing:0.01em; line-height:1.05; margin:0;}
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--amber); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  header{position:sticky; top:0; z-index:50; background:var(--charcoal); border-bottom:1px solid var(--steel-line);}
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 24px; max-width:var(--maxw); margin:0 auto;}
+  .logo{font-family:'Anton',sans-serif; font-size:22px; color:var(--chalk); display:flex; align-items:center; gap:10px;}
+  .logo .mark{width:26px;height:26px;flex:none;}
+  .nav-links{display:flex; gap:32px; align-items:center;}
+  .nav-links a{color:var(--graphite); font-size:15px; font-weight:500; transition:color .15s ease;}
+  .nav-links a:hover, .nav-links a.active{color:var(--chalk);}
+  .btn{display:inline-block; padding:12px 22px; font-weight:700; font-size:14px; border:2px solid transparent; border-radius:2px;}
+  .btn-amber{background:var(--amber); color:var(--ink);}
+  .btn-amber:hover{background:#f0ae4d;}
+  .btn-ink{background:var(--ink); color:var(--chalk);}
+  .btn-ink:hover{background:#000;}
+  .btn-outline-ink{border:2px solid var(--ink); color:var(--ink); background:transparent;}
+  .btn-outline-ink:hover{background:var(--ink); color:var(--chalk);}
+  .menu-toggle{display:none; background:none; border:none; color:var(--chalk); width:32px; height:24px; position:relative;}
+  .menu-toggle span, .menu-toggle::before, .menu-toggle::after{content:""; position:absolute; left:0; right:0; height:2px; background:var(--chalk);}
+  .menu-toggle::before{top:0;}
+  .menu-toggle span{top:11px;}
+  .menu-toggle::after{bottom:0;}
+  @media (max-width:860px){
+    .nav-links{position:absolute; top:100%; left:0; right:0; background:var(--charcoal); flex-direction:column; align-items:flex-start; padding:8px 24px 24px; display:none; border-bottom:1px solid var(--steel-line);}
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:10px 0; width:100%;}
+    .nav-links .btn{margin-top:8px;}
+    .menu-toggle{display:block;}
+  }
+
+  .page-header{background:var(--charcoal); color:var(--chalk); padding:56px 0 44px;}
+  .page-header h1{font-size:clamp(36px,4.6vw,54px); color:var(--chalk);}
+  .page-header p{margin-top:16px; color:var(--graphite); max-width:56ch; font-size:17px;}
+
+  .free-access{
+    background:var(--charcoal-2); border:1px solid var(--steel-line); color:var(--chalk);
+    padding:18px 22px; margin-top:28px; display:flex; align-items:baseline; gap:10px; flex-wrap:wrap;
+  }
+  .free-access b{color:var(--amber); font-family:'Anton'; font-weight:400; font-size:16px;}
+  .free-access span{font-size:14px; color:var(--graphite);}
+
+  section.schedule-section{padding:64px 0;}
+  .legend{display:flex; gap:24px; flex-wrap:wrap; margin-bottom:28px;}
+  .legend-item{display:flex; align-items:center; gap:8px; font-size:13px; color:#4a463d;}
+  .legend-dot{width:10px; height:10px; flex:none;}
+  .legend-dot.funcional{background:var(--amber);}
+  .legend-dot.forca{background:var(--ink);}
+  .legend-dot.mobilidade{background:var(--graphite);}
+
+  .table-scroll{overflow-x:auto; border:1px solid var(--steel-line-light); background:var(--chalk);}
+  table.full-schedule{width:100%; border-collapse:collapse; font-size:14px; min-width:820px;}
+  .full-schedule th{
+    text-align:left; font-family:'Inter'; font-weight:700; font-size:13px;
+    color:var(--graphite); padding:12px 14px; border-bottom:2px solid var(--ink);
+    background:var(--chalk-2);
+  }
+  .full-schedule td{padding:14px; border-bottom:1px solid var(--steel-line-light); border-left:3px solid transparent; vertical-align:top;}
+  .full-schedule tr:hover td{background:#EFEBDE;}
+  .full-schedule .row-time{font-family:'Anton'; color:var(--amber-dim); font-size:16px; white-space:nowrap; border-left:none;}
+  .full-schedule .cls{font-weight:700; display:block;}
+  .full-schedule .instr{color:#6b675e; font-size:12.5px; display:block; margin-top:2px;}
+  .full-schedule td.funcional{border-left-color:var(--amber);}
+  .full-schedule td.forca{border-left-color:var(--ink);}
+  .full-schedule td.mobilidade{border-left-color:var(--graphite);}
+  .full-schedule td.empty{color:#a6a195; font-size:13px;}
+
+  .cta-section{background:var(--amber); color:var(--ink); padding:72px 0;}
+  .cta-section h2{font-size:clamp(28px,3.4vw,40px); max-width:16ch;}
+  .cta-section p{margin-top:14px; font-size:16px; max-width:46ch;}
+  .cta-actions{margin-top:26px; display:flex; gap:14px; flex-wrap:wrap;}
+
+  footer{background:var(--charcoal); color:var(--graphite); padding:56px 0 28px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;}
+  .footer-grid h4{color:var(--chalk); font-family:'Inter'; font-size:14px; font-weight:700; margin-bottom:14px;}
+  .footer-grid p, .footer-grid li{font-size:14px; line-height:1.8;}
+  .footer-grid ul{list-style:none; padding:0; margin:0;}
+  .footer-logo{font-family:'Anton'; font-size:20px; color:var(--chalk); margin-bottom:12px;}
+  .footer-bottom{max-width:var(--maxw); margin:40px auto 0; padding:20px 24px 0; border-top:1px solid var(--steel-line); font-size:12px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  @media (max-width:700px){ .footer-grid{grid-template-columns:1fr; gap:28px;} }
+
+  .demo-banner{background:var(--ink); color:var(--chalk); text-align:center; font-size:13px; padding:10px 16px;}
+  .demo-banner b{color:var(--amber);}
+
+  /* WhatsApp Float Widget */
+  .wa-float{
+    position:fixed;
+    bottom:24px;
+    right:24px;
+    width:58px;
+    height:58px;
+    background-color:#25D366;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 8px 24px rgba(37,211,102,0.45);
+    z-index:999;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .wa-float:hover{
+    transform:scale(1.1);
+    box-shadow:0 12px 30px rgba(37,211,102,0.6);
+  }
+  .wa-float svg{
+    width:32px;
+    height:32px;
+    fill:#fff;
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">Este é um site <b>modelo</b> — layout de demonstração para academias. Nome, cores, textos e fotos serão personalizados para cada cliente.</div>
+
+<header>
+  <div class="nav wrap">
+    <a href="index.html" class="logo">
+      <svg class="mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="10" width="3" height="4" fill="#E8A23A"/>
+        <rect x="6" y="7" width="3" height="10" fill="#E8A23A"/>
+        <rect x="10" y="11" width="4" height="2" fill="#F3F1EA"/>
+        <rect x="15" y="7" width="3" height="10" fill="#E8A23A"/>
+        <rect x="19" y="10" width="3" height="4" fill="#E8A23A"/>
+      </svg>
+      FORJA
+    </a>
+    <button class="menu-toggle" aria-label="Abrir menu" onclick="document.getElementById('navlinks').classList.toggle('open')"><span></span></button>
+    <nav class="nav-links" id="navlinks">
+      <a href="modalidades.html">Modalidades</a>
+      <a href="horarios.html" class="active">Horários</a>
+      <a href="planos.html">Planos</a>
+      <a href="index.html#depoimentos">Depoimentos</a>
+      <a href="index.html#contato" class="btn btn-amber">Aula experimental grátis</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-header">
+  <div class="wrap">
+    <h1>Horários</h1>
+    <p>Grade fixa de segunda a sábado, sem surpresa. Chegue 10 minutos antes da primeira aula pra fazer o check-in.</p>
+    <div class="free-access">
+      <b>Musculação:</b>
+      <span>acesso livre, sem hora marcada — seg a sex das 06h às 22h, sábado das 08h às 13h.</span>
+    </div>
+  </div>
+</section>
+
+<section class="schedule-section">
+  <div class="wrap">
+    <div class="legend">
+      <div class="legend-item"><span class="legend-dot funcional"></span>Treino funcional</div>
+      <div class="legend-item"><span class="legend-dot forca"></span>Força & potência</div>
+      <div class="legend-item"><span class="legend-dot mobilidade"></span>Mobilidade & core</div>
+    </div>
+    <div class="table-scroll">
+      <table class="full-schedule">
+        <thead>
+          <tr><th class="row-time">Horário</th><th>Segunda</th><th>Terça</th><th>Quarta</th><th>Quinta</th><th>Sexta</th><th>Sábado</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-time">06:00</td>
+            <td class="funcional"><span class="cls">Funcional</span><span class="instr">Marina</span></td>
+            <td class="funcional"><span class="cls">Funcional</span><span class="instr">Marina</span></td>
+            <td class="funcional"><span class="cls">Funcional</span><span class="instr">Marina</span></td>
+            <td class="funcional"><span class="cls">Funcional</span><span class="instr">Marina</span></td>
+            <td class="funcional"><span class="cls">Funcional</span><span class="instr">Marina</span></td>
+            <td class="funcional"><span class="cls">Funcional</span><span class="instr">Diego</span></td>
+          </tr>
+          <tr>
+            <td class="row-time">12:15</td>
+            <td class="mobilidade"><span class="cls">Mobilidade & Core</span><span class="instr">Marina</span></td>
+            <td class="empty">—</td>
+            <td class="mobilidade"><span class="cls">Mobilidade & Core</span><span class="instr">Marina</span></td>
+            <td class="empty">—</td>
+            <td class="mobilidade"><span class="cls">Mobilidade & Core</span><span class="instr">Marina</span></td>
+            <td class="empty">—</td>
+          </tr>
+          <tr>
+            <td class="row-time">18:30</td>
+            <td class="forca"><span class="cls">Força & Potência</span><span class="instr">Diego</span></td>
+            <td class="mobilidade"><span class="cls">Mobilidade & Core</span><span class="instr">Marina</span></td>
+            <td class="forca"><span class="cls">Força & Potência</span><span class="instr">Diego</span></td>
+            <td class="mobilidade"><span class="cls">Mobilidade & Core</span><span class="instr">Marina</span></td>
+            <td class="funcional"><span class="cls">Funcional</span><span class="instr">Diego</span></td>
+            <td class="empty">—</td>
+          </tr>
+          <tr>
+            <td class="row-time">19:45</td>
+            <td class="mobilidade"><span class="cls">Mobilidade & Core</span><span class="instr">Marina</span></td>
+            <td class="funcional"><span class="cls">Funcional</span><span class="instr">Diego</span></td>
+            <td class="mobilidade"><span class="cls">Mobilidade & Core</span><span class="instr">Marina</span></td>
+            <td class="funcional"><span class="cls">Funcional</span><span class="instr">Diego</span></td>
+            <td class="forca"><span class="cls">Força & Potência</span><span class="instr">Diego</span></td>
+            <td class="empty">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="wrap">
+    <h2>Não achou um horário que encaixa?</h2>
+    <p>A grade muda a cada trimestre conforme a procura. Fala com a gente que a vaga certa aparece.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/5519999999999?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20a%20disponibilidade%20de%20hor%C3%A1rios%20para%20as%20aulas." target="_blank" rel="noopener" class="btn btn-ink" style="background:#25D366; color:#fff;">Falar no WhatsApp</a>
+      <a href="modalidades.html" class="btn btn-outline-ink">Ver modalidades</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <div class="footer-logo">FORJA</div>
+      <p>Rua das Oficinas, 240 — Vila Industrial<br>Campinas, SP</p>
+    </div>
+    <div>
+      <h4>Horário de funcionamento</h4>
+      <ul>
+        <li>Seg a sex: 06h às 22h</li>
+        <li>Sábado: 08h às 13h</li>
+        <li>Domingo: fechado</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <ul>
+        <li>(19) 3200-0000</li>
+        <li>contato@forjatreino.com.br</li>
+        <li>@forja.treino</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 FORJA Studio de Treino</span>
+    <span>Site modelo — desenvolvido por Gabriel</span>
+  </div>
+</footer>
+
+<!-- Botão Flutuante do WhatsApp -->
+<a href="https://wa.me/5519999999999?text=Ol%C3%A1!%20Gostaria%20de%20consultar%20a%20grade%20de%20hor%C3%A1rios%20da%20FORJA." 
+   class="wa-float" 
+   target="_blank" 
+   rel="noopener" 
+   aria-label="Fale conosco no WhatsApp">
+  <svg viewBox="0 0 24 24">
+    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.17c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.25-4.4c0-4.51 3.67-8.18 8.19-8.18 2.19 0 4.24.85 5.79 2.4 1.54 1.55 2.4 3.6 2.4 5.79 0 4.52-3.68 8.2-8.19 8.2zm4.49-6.14c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.22-.19-.47-.31z"/>
+  </svg>
+</a>
+</body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planos e Preços — FORJA Studio de Treino</title>
+<meta name="description" content="Conheça nossos planos de musculação, funcional e acompanhamento personalizado. Sem taxa de matrícula!">
+<meta name="theme-color" content="#1C1B19">
+<meta property="og:title" content="Planos e Preços — FORJA Studio de Treino">
+<meta property="og:description" content="Planos a partir de R$ 99/mês. Escolha o seu e comece a treinar hoje!">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --charcoal:#1C1B19; --charcoal-2:#232120; --chalk:#F3F1EA; --chalk-2:#EAE7DC;
+    --amber:#E8A23A; --amber-dim:#B87A26; --graphite:#8B8880;
+    --steel-line:#33312D; --steel-line-light:#DAD5C7; --ink:#141312; --maxw:1160px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; font-family:'Inter',sans-serif; background:var(--chalk); color:var(--ink); line-height:1.5;}
+  h1,h2,h3{font-family:'Anton',sans-serif; font-weight:400; letter-spacing:0.01em; line-height:1.05; margin:0;}
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid var(--amber); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important;} }
+
+  header{position:sticky; top:0; z-index:50; background:var(--charcoal); border-bottom:1px solid var(--steel-line);}
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 24px; max-width:var(--maxw); margin:0 auto;}
+  .logo{font-family:'Anton',sans-serif; font-size:22px; color:var(--chalk); display:flex; align-items:center; gap:10px;}
+  .logo .mark{width:26px;height:26px;flex:none;}
+  .nav-links{display:flex; gap:32px; align-items:center;}
+  .nav-links a{color:var(--graphite); font-size:15px; font-weight:500; transition:color .15s ease;}
+  .nav-links a:hover, .nav-links a.active{color:var(--chalk);}
+  .btn{display:inline-block; padding:12px 22px; font-weight:700; font-size:14px; border:2px solid transparent; border-radius:2px;}
+  .btn-amber{background:var(--amber); color:var(--ink);}
+  .btn-amber:hover{background:#f0ae4d;}
+  .btn-ink{background:var(--ink); color:var(--chalk);}
+  .btn-ink:hover{background:#000;}
+  .btn-outline-ink{border:2px solid var(--ink); color:var(--ink); background:transparent;}
+  .btn-outline-ink:hover{background:var(--ink); color:var(--chalk);}
+  .btn-outline-light{border-color:var(--chalk); color:var(--chalk); background:transparent;}
+  .btn-outline-light:hover{background:var(--chalk); color:var(--ink);}
+  .menu-toggle{display:none; background:none; border:none; color:var(--chalk); width:32px; height:24px; position:relative;}
+  .menu-toggle span, .menu-toggle::before, .menu-toggle::after{content:""; position:absolute; left:0; right:0; height:2px; background:var(--chalk);}
+  .menu-toggle::before{top:0;}
+  .menu-toggle span{top:11px;}
+  .menu-toggle::after{bottom:0;}
+  @media (max-width:860px){
+    .nav-links{position:absolute; top:100%; left:0; right:0; background:var(--charcoal); flex-direction:column; align-items:flex-start; padding:8px 24px 24px; display:none; border-bottom:1px solid var(--steel-line);}
+    .nav-links.open{display:flex;}
+    .nav-links a{padding:10px 0; width:100%;}
+    .nav-links .btn{margin-top:8px;}
+    .menu-toggle{display:block;}
+  }
+
+  .page-header{background:var(--charcoal); color:var(--chalk); padding:56px 0 44px;}
+  .page-header h1{font-size:clamp(36px,4.6vw,54px); color:var(--chalk);}
+  .page-header p{margin-top:16px; color:var(--graphite); max-width:56ch; font-size:17px;}
+
+  section.plans-section{background:var(--charcoal); color:var(--chalk); padding:0 0 80px;}
+  .plans{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .plan{background:var(--charcoal-2); border:1px solid var(--steel-line); padding:34px 28px; display:flex; flex-direction:column;}
+  .plan.featured{border-color:var(--amber); background:#282520; position:relative;}
+  .plan.featured::before{
+    content:"Mais escolhido"; position:absolute; top:-13px; left:28px;
+    background:var(--amber); color:var(--ink); font-size:12px; font-weight:800; padding:4px 10px;
+  }
+  .plan h3{font-family:'Inter'; font-weight:700; font-size:15px; color:var(--graphite); margin-bottom:14px;}
+  .plan .price{font-family:'Anton'; font-size:42px; color:var(--chalk);}
+  .plan .price sup{font-family:'Inter'; font-size:16px; font-weight:600; margin-right:4px;}
+  .plan .price small{font-family:'Inter'; font-size:14px; color:var(--graphite); font-weight:500;}
+  .plan ul{list-style:none; margin:26px 0 30px; padding:0; flex:1;}
+  .plan li{font-size:14px; color:var(--graphite); padding:9px 0 9px 24px; position:relative; border-top:1px solid var(--steel-line);}
+  .plan li:first-child{border-top:none;}
+  .plan li::before{
+    content:""; position:absolute; left:0; top:14px; width:9px; height:9px;
+    border:2px solid var(--amber-dim); border-left:none; border-top:none; transform:rotate(45deg) translateY(-4px);
+  }
+  @media (max-width:900px){ .plans{grid-template-columns:1fr; max-width:420px; margin:0 auto;} }
+
+  .day-pass{
+    margin-top:28px; border:1px dashed var(--steel-line); padding:18px 22px;
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;
+  }
+  .day-pass span{font-size:14px; color:var(--graphite);}
+  .day-pass b{color:var(--chalk); font-family:'Anton'; font-weight:400; font-size:18px; margin-right:8px;}
+
+  section.compare-section{padding:80px 0;}
+  .compare-scroll{overflow-x:auto; border:1px solid var(--steel-line-light);}
+  table.compare{width:100%; border-collapse:collapse; font-size:14px; min-width:640px; background:var(--chalk);}
+  table.compare th, table.compare td{padding:14px 16px; border-bottom:1px solid var(--steel-line-light); text-align:left;}
+  table.compare thead th{
+    font-family:'Anton'; font-weight:400; font-size:16px; color:var(--ink);
+    background:var(--chalk-2); border-bottom:2px solid var(--ink);
+  }
+  table.compare thead th:first-child{font-family:'Inter'; font-weight:700; font-size:13px; color:var(--graphite);}
+  table.compare td:first-child{font-weight:600; color:#3a372f;}
+  table.compare td{text-align:center; color:#4a463d;}
+  table.compare td:first-child{text-align:left;}
+  table.compare .yes{color:var(--amber-dim); font-weight:800;}
+  table.compare .no{color:#c7c2b4;}
+
+  section.faq-section{background:var(--chalk-2); padding:80px 0;}
+  .faq-list{max-width:760px;}
+  .faq-item{border-bottom:1px solid var(--steel-line-light); padding:6px 0;}
+  .faq-item summary{
+    cursor:pointer; padding:16px 4px; font-weight:700; font-size:15.5px; list-style:none;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:"+"; font-family:'Anton'; font-size:22px; color:var(--amber-dim); flex:none;}
+  .faq-item[open] summary::after{content:"–";}
+  .faq-item p{margin:0 4px 18px; font-size:14.5px; color:#4a463d; max-width:64ch;}
+
+  .cta-section{background:var(--amber); color:var(--ink); padding:72px 0;}
+  .cta-section h2{font-size:clamp(28px,3.4vw,40px); max-width:16ch;}
+  .cta-section p{margin-top:14px; font-size:16px; max-width:46ch;}
+  .cta-actions{margin-top:26px; display:flex; gap:14px; flex-wrap:wrap;}
+
+  footer{background:var(--charcoal); color:var(--graphite); padding:56px 0 28px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;}
+  .footer-grid h4{color:var(--chalk); font-family:'Inter'; font-size:14px; font-weight:700; margin-bottom:14px;}
+  .footer-grid p, .footer-grid li{font-size:14px; line-height:1.8;}
+  .footer-grid ul{list-style:none; padding:0; margin:0;}
+  .footer-logo{font-family:'Anton'; font-size:20px; color:var(--chalk); margin-bottom:12px;}
+  .footer-bottom{max-width:var(--maxw); margin:40px auto 0; padding:20px 24px 0; border-top:1px solid var(--steel-line); font-size:12px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  @media (max-width:700px){ .footer-grid{grid-template-columns:1fr; gap:28px;} }
+
+  .demo-banner{background:var(--ink); color:var(--chalk); text-align:center; font-size:13px; padding:10px 16px;}
+  .demo-banner b{color:var(--amber);}
+
+  /* WhatsApp Float Widget */
+  .wa-float{
+    position:fixed;
+    bottom:24px;
+    right:24px;
+    width:58px;
+    height:58px;
+    background-color:#25D366;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 8px 24px rgba(37,211,102,0.45);
+    z-index:999;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .wa-float:hover{
+    transform:scale(1.1);
+    box-shadow:0 12px 30px rgba(37,211,102,0.6);
+  }
+  .wa-float svg{
+    width:32px;
+    height:32px;
+    fill:#fff;
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">Este é um site <b>modelo</b> — layout de demonstração para academias. Nome, cores, textos e fotos serão personalizados para cada cliente.</div>
+
+<header>
+  <div class="nav wrap">
+    <a href="index.html" class="logo">
+      <svg class="mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="10" width="3" height="4" fill="#E8A23A"/>
+        <rect x="6" y="7" width="3" height="10" fill="#E8A23A"/>
+        <rect x="10" y="11" width="4" height="2" fill="#F3F1EA"/>
+        <rect x="15" y="7" width="3" height="10" fill="#E8A23A"/>
+        <rect x="19" y="10" width="3" height="4" fill="#E8A23A"/>
+      </svg>
+      FORJA
+    </a>
+    <button class="menu-toggle" aria-label="Abrir menu" onclick="document.getElementById('navlinks').classList.toggle('open')"><span></span></button>
+    <nav class="nav-links" id="navlinks">
+      <a href="modalidades.html">Modalidades</a>
+      <a href="horarios.html">Horários</a>
+      <a href="planos.html" class="active">Planos</a>
+      <a href="index.html#depoimentos">Depoimentos</a>
+      <a href="index.html#contato" class="btn btn-amber">Aula experimental grátis</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-header" style="padding-bottom:0;">
+  <div class="wrap">
+    <h1>Planos</h1>
+    <p>Sem taxa de matrícula em setembro. Cancelamento a qualquer momento, sem multa.</p>
+  </div>
+</section>
+
+<section class="plans-section">
+  <div class="wrap" style="padding-top:44px;">
+    <div class="plans">
+      <div class="plan">
+        <h3>Musculação</h3>
+        <div class="price"><sup>R$</sup>99<small>/mês</small></div>
+        <ul>
+          <li>Acesso ao piso de musculação</li>
+          <li>Avaliação física inicial</li>
+          <li>Ficha revisada a cada 6 semanas</li>
+        </ul>
+        <a href="https://wa.me/5519999999999?text=Ol%C3%A1!%20Gostaria%20de%20assinar%20o%20Plano%20Muscula%C3%A7%C3%A3o%20(R$%2099/m%C3%AAs)." target="_blank" rel="noopener" class="btn btn-outline-light">Escolher plano</a>
+      </div>
+      <div class="plan featured">
+        <h3>Completo</h3>
+        <div class="price"><sup>R$</sup>149<small>/mês</small></div>
+        <ul>
+          <li>Musculação + todas as aulas em grupo</li>
+          <li>Avaliação física a cada 2 meses</li>
+          <li>1 sessão de personal por mês</li>
+        </ul>
+        <a href="https://wa.me/5519999999999?text=Ol%C3%A1!%20Gostaria%20de%20assinar%20o%20Plano%20Completo%20(R$%20149/m%C3%AAs)." target="_blank" rel="noopener" class="btn btn-amber">Escolher plano</a>
+      </div>
+      <div class="plan">
+        <h3>Personal</h3>
+        <div class="price"><sup>R$</sup>320<small>/mês</small></div>
+        <ul>
+          <li>Treino 100% individual</li>
+          <li>Horário exclusivo combinado</li>
+          <li>Acesso completo à estrutura</li>
+        </ul>
+        <a href="https://wa.me/5519999999999?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20o%20Plano%20Personal%20(R$%20320/m%C3%AAs)." target="_blank" rel="noopener" class="btn btn-outline-light">Escolher plano</a>
+      </div>
+    </div>
+    <div class="day-pass">
+      <span><b>R$ 35</b>diária avulsa — pra quem só quer experimentar antes de assinar.</span>
+      <a href="https://wa.me/5519999999999?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20di%C3%A1ria%20avulsa%20(R$%2035)." target="_blank" rel="noopener" class="btn btn-outline-light">Quero uma diária</a>
+    </div>
+  </div>
+</section>
+
+<section class="compare-section">
+  <div class="wrap">
+    <div class="compare-scroll">
+      <table class="compare">
+        <thead>
+          <tr><th>O que está incluso</th><th>Musculação</th><th>Completo</th><th>Personal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Acesso à musculação</td><td class="yes">Sim</td><td class="yes">Sim</td><td class="yes">Sim</td></tr>
+          <tr><td>Aulas em grupo ilimitadas</td><td class="no">—</td><td class="yes">Sim</td><td class="no">—</td></tr>
+          <tr><td>Avaliação física</td><td>Na matrícula</td><td>A cada 2 meses</td><td>Mensal</td></tr>
+          <tr><td>Sessão de personal</td><td class="no">—</td><td>1x por mês</td><td>Todas as sessões</td></tr>
+          <tr><td>Horário exclusivo</td><td class="no">—</td><td class="no">—</td><td class="yes">Sim</td></tr>
+          <tr><td>Congelamento do plano</td><td class="yes">Até 30 dias/ano</td><td class="yes">Até 30 dias/ano</td><td class="yes">Sob combinado</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:36px;">
+      <h2 style="font-size:clamp(28px,3.4vw,40px);">Perguntas frequentes</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary>Tem fidelidade nos planos?</summary>
+        <p>Não. Todos os planos são mês a mês, sem multa de cancelamento. Você avisa com 5 dias de antecedência e pronto.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Posso congelar meu plano se viajar?</summary>
+        <p>Sim, todo aluno tem direito a até 30 dias de congelamento por ano, sem custo. É só avisar na recepção ou pelo WhatsApp.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Consigo trocar de plano depois?</summary>
+        <p>Sim, a troca pode ser feita a qualquer momento. Se for pra um plano mais completo, a diferença é cobrada proporcional ao mês corrente.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Quais as formas de pagamento?</summary>
+        <p>Cartão de crédito (recorrência automática), débito em conta e Pix. Não trabalhamos com boleto.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Tem desconto pra pagamento anual?</summary>
+        <p>Sim, fechando o plano Completo ou Musculação por 12 meses o valor sai com 15% de desconto. Fala com a gente pra simular.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="wrap">
+    <h2>Pronto pra começar?</h2>
+    <p>Agenda sua aula experimental grátis e decide o plano depois de treinar com a gente.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/5519999999999?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20os%20planos%20da%20FORJA." target="_blank" rel="noopener" class="btn btn-ink" style="background:#25D366; color:#fff;">Falar no WhatsApp</a>
+      <a href="horarios.html" class="btn btn-outline-ink">Ver horários</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <div class="footer-logo">FORJA</div>
+      <p>Rua das Oficinas, 240 — Vila Industrial<br>Campinas, SP</p>
+    </div>
+    <div>
+      <h4>Horário de funcionamento</h4>
+      <ul>
+        <li>Seg a sex: 06h às 22h</li>
+        <li>Sábado: 08h às 13h</li>
+        <li>Domingo: fechado</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <ul>
+        <li>(19) 3200-0000</li>
+        <li>contato@forjatreino.com.br</li>
+        <li>@forja.treino</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 FORJA Studio de Treino</span>
+    <span>Site modelo — desenvolvido por Gabriel</span>
+  </div>
+</footer>
+
+<!-- Botão Flutuante do WhatsApp -->
+<a href="https://wa.me/5519999999999?text=Ol%C3%A1!%20Gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20os%20planos%20da%20FORJA." 
+   class="wa-float" 
+   target="_blank" 
+   rel="noopener" 
+   aria-label="Fale conosco no WhatsApp">
+  <svg viewBox="0 0 24 24">
+    <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.17c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.16 8.16 0 0 1-1.25-4.4c0-4.51 3.67-8.18 8.19-8.18 2.19 0 4.24.85 5.79 2.4 1.54 1.55 2.4 3.6 2.4 5.79 0 4.52-3.68 8.2-8.19 8.2zm4.49-6.14c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.22-.19-.47-.31z"/>
+  </svg>
+</a>
+</body>
+</html>
